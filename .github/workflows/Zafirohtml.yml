@@ -1,4 +1,4 @@
-name: Otomatik APK Olustur
+name: Otomatik APK Uygulamasi
 
 on:
   push:
@@ -12,10 +12,12 @@ jobs:
     - name: Depoyu Cek
       uses: actions/checkout@v4
 
-    - name: Zip Dosyasini Cikart
-      run: unzip -q uygulama.zip -d proje_klasoru
+    - name: Zip Dosyasini Otomatik Bul ve Cikart
+      run: |
+        ZIP_FILE=$(find . -maxdepth 1 -name "*.zip" | head -n 1)
+        unzip -q "$ZIP_FILE" -d proje_klasoru
 
-    - name: Java JDK Kur
+    - name: Java JDK 17 Kur
       uses: actions/setup-java@v4
       with:
         java-version: '17'
